@@ -35,7 +35,7 @@ pipeline {
      post {
         always {
             emailext(
-                to: 'gaopena127.vm@gmail.com', // ilagay mo Gmail mo
+                to: 'gaopena2127.viii@gmail.com', 
                 subject: "Build ${env.JOB_NAME} #${env.BUILD_NUMBER} - ${currentBuild.currentResult}",
                 body: """<p>Pipeline finished with status: <b>${currentBuild.currentResult}</b></p>
                          <p>Check console output at: <a href="${env.BUILD_URL}">${env.BUILD_URL}</a></p>""",
