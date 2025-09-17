@@ -16,13 +16,13 @@ pipeline {
 
         stage('Run Tests') {
             steps {                 
-                bat 'echo Skipping snyk test (auth required)' // Allows pipeline to continue despite test failures
+                bat 'npm test || exit /b 0' // Allows pipeline to continue despite test failures
             }
         }
 
         stage('Generate Coverage Report') {
             steps {
-                bat 'echo Generating dummy coverage report'
+                bat 'npm run coverage || exit /b 0'
             }
         }
 
@@ -30,17 +30,6 @@ pipeline {
             steps {
                 bat 'npm audit || exit /b 0'
             }
-        }
-    }
-     post {
-        always {
-            emailext(
-                to: 'gaopena2127.viii@gmail.com', 
-                subject: "Build ${env.JOB_NAME} #${env.BUILD_NUMBER} - ${currentBuild.currentResult}",
-                body: """<p>Pipeline finished with status: <b>${currentBuild.currentResult}</b></p>
-                         <p>Check console output at: <a href="${env.BUILD_URL}">${env.BUILD_URL}</a></p>""",
-                attachLog: true
-            )
         }
     }
 }
